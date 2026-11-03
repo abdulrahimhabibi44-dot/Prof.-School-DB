@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROF. SCHOOL | Operational Management Database</title>
+<style>
+:root{--navy:#14263d;--navy2:#203a58;--teal:#168879;--gold:#d6a64b;--bg:#f3f6fa;--card:#fff;--ink:#1d2938;--muted:#66758a;--line:#dfe6ee;--red:#b74747;--green:#21845b;--shadow:0 8px 24px rgba(24,44,70,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
+header{background:linear-gradient(110deg,var(--navy),var(--navy2));color:white;padding:20px 26px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.brand{display:flex;gap:13px;align-items:center}.logo{width:46px;height:46px;border:2px solid var(--gold);border-radius:12px;display:grid;place-items:center;color:var(--gold);font-weight:800;font-size:17px}.brand h1{font-size:19px;margin:0 0 4px}.brand p{margin:0;color:#c6d2df;font-size:12px}.header-actions{display:flex;gap:8px;flex-wrap:wrap}
+button,.btn{border:0;border-radius:8px;padding:10px 13px;font-weight:700;cursor:pointer;font-size:13px}.primary{background:var(--teal);color:#fff}.gold{background:var(--gold);color:#17283c}.light{background:#edf2f7;color:#24374d}.danger{background:#fae9e9;color:var(--red)}button:hover{filter:brightness(.96)}
+.layout{display:grid;grid-template-columns:245px minmax(0,1fr);min-height:calc(100vh - 86px)}
+aside{background:#fff;border-right:1px solid var(--line);padding:18px 12px}.nav-label{font-size:10px;letter-spacing:1.2px;color:#91a0b1;font-weight:800;padding:12px 12px 7px}.nav{display:flex;flex-direction:column;gap:4px}.nav button{background:transparent;text-align:left;color:#43546a;font-weight:600;padding:11px 12px;border-radius:8px}.nav button.active{background:#e8f4f2;color:#087968}.nav button span{display:inline-block;width:24px}
+main{padding:25px;max-width:1500px;width:100%;margin:0 auto}.page-head{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;flex-wrap:wrap;margin-bottom:20px}.page-head h2{margin:0 0 6px;font-size:25px;color:var(--navy)}.page-head p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}.stat,.panel,.table-wrap,.form-card{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}.stat{padding:17px}.stat .label{font-size:12px;color:var(--muted)}.stat .value{font-size:29px;font-weight:800;color:var(--navy);margin-top:8px}.stat .hint{font-size:11px;color:var(--muted);margin-top:4px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{padding:18px;margin-bottom:16px}.panel h3{margin:0 0 13px;font-size:16px;color:var(--navy)}.muted{color:var(--muted)}.small{font-size:12px}.bar-row{display:grid;grid-template-columns:140px 1fr 32px;gap:10px;align-items:center;margin:13px 0;font-size:12px}.bar{height:9px;background:#edf1f5;border-radius:99px;overflow:hidden}.bar i{height:100%;display:block;background:var(--teal);border-radius:99px}.table-wrap{overflow:auto}.toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:13px}.search{padding:10px 12px;border:1px solid var(--line);border-radius:8px;min-width:220px;font-size:13px;outline-color:var(--teal)}table{width:100%;border-collapse:collapse;min-width:760px}th,td{text-align:left;padding:12px 13px;border-bottom:1px solid #edf0f4;font-size:12px;vertical-align:top}th{background:#f7f9fb;color:#64748a;font-size:10px;text-transform:uppercase;letter-spacing:.6px;position:sticky;top:0}tr:last-child td{border-bottom:0}.tag{display:inline-block;padding:4px 8px;border-radius:99px;background:#eaf3f5;color:#26746f;font-size:10px;font-weight:700}.tag.gray{background:#edf0f4;color:#617084}.tag.orange{background:#fff3df;color:#956313}.tag.red{background:#fae9e9;color:#a33c3c}.actions{display:flex;gap:5px}.actions button{padding:6px 8px;font-size:11px}.empty{padding:35px;text-align:center;color:var(--muted)}.modal-bg{position:fixed;inset:0;background:rgba(10,24,42,.55);display:none;align-items:center;justify-content:center;padding:18px;z-index:5}.modal-bg.show{display:flex}.modal{background:white;border-radius:14px;max-width:760px;width:100%;max-height:92vh;overflow:auto;padding:22px;box-shadow:0 20px 70px #10243b55}.modal-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:15px}.modal-head h3{margin:0;color:var(--navy)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:11px;font-weight:700;color:#526277}.field input,.field select,.field textarea{border:1px solid #d9e1e9;border-radius:8px;padding:10px;font:13px Arial;outline-color:var(--teal);background:white}.field textarea{min-height:76px;resize:vertical}.form-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.notice{padding:12px 14px;border-radius:9px;background:#fff7e8;border:1px solid #f1dfb8;color:#76551d;font-size:12px;line-height:1.5;margin-bottom:15px}.success{background:#e9f6f0;border-color:#c6e6d7;color:#236448}.org-card{border:1px solid var(--line);padding:14px;border-radius:10px;background:white;margin:8px 0}.org-card strong{color:var(--navy)}.org-children{margin-left:23px;border-left:2px solid #dce8e7;padding-left:13px}.pill{font-size:10px;background:#eef2f6;border-radius:20px;padding:4px 7px;color:#65758a}.footer-note{font-size:11px;color:#8793a2;text-align:center;padding:18px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid var(--line);padding:8px}.nav{display:flex;flex-direction:row;overflow:auto}.nav-label{display:none}.nav button{white-space:nowrap}.stats{grid-template-columns:repeat(2,1fr)}main{padding:16px}.grid2{grid-template-columns:1fr}}
+@media(max-width:560px){.stats{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.brand h1{font-size:16px}}
+/* ===== Department Task Management ===== */
+.dtabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.dtab{background:#fff;border:1px solid var(--line);color:#43546a;font-weight:600;padding:8px 11px;border-radius:99px;display:flex;gap:6px;align-items:center}
+.dtab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.dtab .pill{background:#e6ecf2}.dtab.active .pill{background:#ffffff30;color:#fff}
+.odot{background:var(--red);color:#fff;border-radius:99px;font-size:10px;padding:2px 6px}
+.ptag{display:inline-block;padding:4px 9px;border-radius:99px;font-size:10px;font-weight:800;border:1px solid transparent;white-space:nowrap}
+.pri-Critical{background:#fde8e8;color:#b42318;border-color:#f3a8a2}
+.pri-High{background:#ffe9cf;color:#b54708;border-color:#f6b872}
+.pri-Medium{background:#fff2a8;color:#6b5200;border-color:#e6c93c}
+.pri-Low{background:#dff4e6;color:#1b7a46;border-color:#9ad4b0}
+tr.prow td:first-child{box-shadow:inset 5px 0 0 transparent}
+tr.p-Critical td:first-child{box-shadow:inset 5px 0 0 #d92d20}
+tr.p-High td:first-child{box-shadow:inset 5px 0 0 #f79009}
+tr.p-Medium td:first-child{box-shadow:inset 5px 0 0 #eac22b}
+tr.p-Low td:first-child{box-shadow:inset 5px 0 0 #2fa862}
+.tag.st-NotStarted{background:#edf0f4;color:#617084}
+.tag.st-InProgress{background:#e4efff;color:#1f5fbf}
+.tag.st-Completed{background:#e0f5e8;color:#1b7a46}
+.tag.st-Overdue{background:#fde8e8;color:#b42318}
+.pbar{height:9px;background:#edf1f5;border-radius:99px;overflow:hidden;margin:4px 0}
+.pbar i{display:block;height:100%;background:var(--teal);border-radius:99px}
+.pbar.ok i,.bar.ok i{background:var(--green)}.pbar.bad i,.bar.bad i{background:var(--red)}
+.neg{color:var(--red);font-weight:700}
+.pcol{min-width:175px}.bcol{min-width:150px}
+.desc{max-width:280px;margin-top:4px;color:#51627a;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.actions.wrap{display:grid;grid-template-columns:repeat(2,max-content);gap:5px;max-width:none}.actions.wrap button{white-space:nowrap}
+.stats.s6{grid-template-columns:repeat(6,minmax(0,1fr))}.stats.s6 .value{font-size:24px}
+.modal.wide{max-width:900px}
+.detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+.dg{background:#f7f9fb;border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-size:12px}.dg>span{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.hitem{border-left:3px solid var(--teal);padding:9px 13px;margin:10px 0;background:#f7f9fb;border-radius:0 8px 8px 0}
+.hitem.created{border-left-color:#aab6c4}
+.hhead{display:flex;gap:8px;align-items:center;margin-bottom:4px;font-size:12px}
+.hnote{margin-top:5px;white-space:pre-wrap}
+.pvbox{padding:8px 0}
+.orgprog{display:flex;gap:18px;align-items:center}.orgprog .big{font-size:38px;font-weight:800;color:var(--navy)}
+tr.clickrow{cursor:pointer}tr.clickrow:hover td{background:#f4f9f8}
+tr.total td{background:#f1f6f9;font-weight:700}
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center;font-size:11px;color:var(--muted)}
+@media(max-width:900px){.stats.s6{grid-template-columns:repeat(2,1fr)}.detail-grid{grid-template-columns:1fr 1fr}}
+@media print{header,aside,.header-actions,.toolbar,.page-head button,.actions,.modal-bg{display:none!important}.layout{display:block}main{padding:0;max-width:none}.panel,.table-wrap,.stat{box-shadow:none}body{background:#fff}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand"><div class="logo">PS</div><div><h1>PROF. SCHOOL | Operational Management</h1><p>Strategy • Departments • People • Responsibilities • Performance</p></div></div>
+ <div class="header-actions"><button class="light" onclick="exportData()">⬇ Export backup</button><button class="light" onclick="document.getElementById('importFile').click()">⬆ Import backup</button><input id="importFile" type="file" accept=".json" hidden onchange="importData(event)"><button class="gold" onclick="resetDemo()">Reset demo data</button></div>
+</header>
+<div class="layout">
+<aside>
+ <div class="nav-label">ORGANIZATION</div><nav class="nav" id="nav">
+ <button class="active" data-page="dashboard"><span>▦</span> Dashboard</button>
+ <button data-page="strategy"><span>◎</span> Strategy & Goals</button>
+ <button data-page="departments"><span>▤</span> Departments</button>
+ <button data-page="people"><span>♙</span> People & Positions</button>
+ <div class="nav-label">EXECUTION</div>
+ <button data-page="responsibilities"><span>☷</span> Responsibilities</button>
+ <button data-page="tasks"><span>✓</span> Department Tasks</button>
+ <button data-page="taskreports"><span>▤</span> Task Reports</button>
+ <button data-page="kpis"><span>▥</span> KPIs & Performance</button>
+ <button data-page="processes"><span>⇄</span> Processes & SOPs</button>
+ <div class="nav-label">COORDINATION</div>
+ <button data-page="meetings"><span>▣</span> Meetings & Decisions</button>
+ <button data-page="raci"><span>▦</span> RACI Matrix</button>
+ <button data-page="orgchart"><span>⌘</span> Organization Chart</button>
+ <div class="nav-label">DATA</div>
+ <button data-page="data"><span>⚙</span> Data & Instructions</button>
+ </nav>
+</aside>
+<main id="main"></main>
+</div>
+<div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()"><div class="modal"><div class="modal-head"><h3 id="modalTitle">Add record</h3><button class="light" onclick="closeModal()">✕</button></div><form id="recordForm"><div class="form-grid" id="formFields"></div><div class="form-actions"><button type="button" class="light" onclick="closeModal()">Cancel</button><button class="primary" type="submit">Save record</button></div></form></div></div>
+<div class="modal-bg" id="panelBg" onclick="if(event.target===this)closePanel()"><div class="modal wide"><div class="modal-head"><h3 id="panelTitle"></h3><button class="light" onclick="closePanel()">✕</button></div><div id="panelBody"></div></div></div>
+<script>
+const KEY='prof_school_ops_db_v1';
+const today=()=>new Date().toISOString().slice(0,10);
+const uid=()=>Math.random().toString(36).slice(2,9)+Date.now().toString(36);
+const schemas={
+strategy:{title:'Strategy & Goals',singular:'Strategic goal',desc:'Define the destination, measurable outcomes, strategic priorities, and accountable owners.',fields:[
+['name','Goal / objective','text',true],['pillar','Strategic pillar','select',true,['Education quality','Digital literacy & practical skills','Islamic education & character','Student welfare & access','Employment & sustainability','Organizational excellence']],['description','Description','textarea'],['target','Target / intended result','text'],['baseline','Baseline','text'],['measure','Success measure','text'],['ownerDept','Lead department','ref:departments'],['ownerPerson','Accountable owner','ref:people'],['start','Start date','date'],['due','Target date','date'],['status','Status','select',true,['Draft','Active','At risk','Completed','On hold']],['priority','Priority','select',false,['High','Medium','Low']]]},
+departments:{title:'Departments',singular:'Department',desc:'Set the department mandate, hierarchy, leadership, and links to strategic goals.',fields:[
+['name','Department name','text',true],['code','Department code','text'],['parent','Parent department','ref:departments'],['mandate','Purpose / mandate','textarea',true],['head','Department head','ref:people'],['subhead','Sub-head','ref:people'],['goal','Main strategic goal','ref:strategy'],['keyDuties','Key responsibilities','textarea'],['authority','Decision authority / limits','textarea'],['status','Status','select',true,['Active','Planned','Inactive']]]},
+people:{title:'People & Positions',singular:'Person',desc:'Register personnel, positions, supervisors, department membership, skills, and contact details.',fields:[
+['name','Full name','text',true],['employeeId','Personnel ID','text'],['department','Department','ref:departments',true],['position','Position / job title','text',true],['roleType','Role level','select',false,['Head','Sub-head','Officer','Teacher / Trainer','Assistant','Support staff','Volunteer','Consultant']],['reportsTo','Reports to','ref:people'],['email','Email','email'],['phone','Phone','text'],['skills','Skills / expertise','textarea'],['employment','Employment type','select',false,['Full-time','Part-time','Contract','Volunteer']],['start','Start date','date'],['status','Status','select',true,['Active','On leave','Inactive']]]},
+responsibilities:{title:'Responsibilities',singular:'Responsibility',desc:'Record clear ownership, expected outputs, authority, and performance standards for every role.',fields:[
+['title','Responsibility title','text',true],['department','Department','ref:departments',true],['person','Responsible person','ref:people'],['goal','Linked strategic goal','ref:strategy'],['description','What must be done?','textarea',true],['output','Expected output / evidence','textarea'],['authority','Authority required','textarea'],['frequency','Frequency','select',false,['Daily','Weekly','Monthly','Quarterly','Annual','As needed']],['standard','Quality / service standard','text'],['status','Status','select',false,['Active','Under review','Closed']]]},
+tasks:{title:'Department Tasks',singular:'task',desc:'Department task lists with priorities, baselines, targets, budgets and progress history.',fields:[]},
+kpis:{title:'KPIs & Performance',singular:'KPI',desc:'Track whether departments and the organization are achieving measurable results.',fields:[
+['name','KPI name','text',true],['goal','Strategic goal','ref:strategy'],['department','Department','ref:departments',true],['owner','KPI owner','ref:people'],['definition','Definition / calculation','textarea'],['unit','Unit','text'],['baseline','Baseline value','text'],['target','Target value','text',true],['actual','Current actual value','text'],['frequency','Review frequency','select',false,['Weekly','Monthly','Quarterly','Annually']],['period','Reporting period','text'],['status','Status','select',false,['On track','At risk','Off track','Achieved']]]},
+processes:{title:'Processes & SOPs',singular:'Process / SOP',desc:'Document repeatable workflows, process owners, steps, controls, and service standards.',fields:[
+['name','Process name','text',true],['department','Process owner department','ref:departments',true],['owner','Process owner','ref:people'],['purpose','Purpose / trigger','textarea'],['steps','Workflow steps','textarea',true],['inputs','Inputs / required documents','textarea'],['outputs','Expected outputs','textarea'],['standard','Time / quality standard','text'],['control','Approval / control points','textarea'],['version','Version','text'],['review','Next review date','date'],['status','Status','select',false,['Draft','Approved','Under review','Archived']]]},
+meetings:{title:'Meetings & Decisions',singular:'Meeting / decision',desc:'Keep institutional memory: agendas, decisions, action owners, and follow-up dates.',fields:[
+['title','Meeting / decision title','text',true],['date','Date','date',true],['type','Type','select',false,['Leadership meeting','Department meeting','Strategy review','Operations review','Project meeting','Other']],['department','Department','ref:departments'],['participants','Participants','textarea'],['agenda','Agenda / issue','textarea'],['decision','Decision / minutes','textarea'],['action','Follow-up action','textarea'],['owner','Action owner','ref:people'],['due','Follow-up deadline','date'],['status','Follow-up status','select',false,['Open','In progress','Completed','Deferred']]]},
+raci:{title:'RACI Matrix',singular:'RACI assignment',desc:'Clarify who is Responsible, Accountable, Consulted, and Informed for a key activity.',fields:[
+['activity','Activity / decision','text',true],['goal','Linked strategic goal','ref:strategy'],['department','Lead department','ref:departments'],['responsible','Responsible (does the work)','ref:people'],['accountable','Accountable (owns the result)','ref:people',true],['consulted','Consulted (gives input)','text'],['informed','Informed (kept updated)','text'],['notes','Notes / boundaries','textarea']]}
+};
+const defaultDepartments=[
+{name:'Executive Leadership',code:'EXE',mandate:'Set direction, approve priorities and resources, resolve cross-department issues, and review organizational performance.',keyDuties:'Strategy; governance; decision-making; risk oversight; organizational alignment.',authority:'Approve strategy and annual plans; approve decisions within delegated policy.'},
+{name:'Programs & Education',code:'EDU',mandate:'Design, manage, and deliver quality education and learning programs.',keyDuties:'Curriculum; academic planning; teaching quality; assessment; school coordination.'},
+{name:'Digital Skills & Innovation',code:'DSI',mandate:'Deliver practical digital and market-relevant skills, including graphic design, editing, production, databases, and robotics.',keyDuties:'Digital curriculum; labs; practical projects; portfolios; innovation; technical assessment.'},
+{name:'Islamic Education & Student Development',code:'ISD',mandate:'Integrate Islamic learning, values, character development, and personal growth into student development.',keyDuties:'Islamic studies; character education; student development activities.'},
+{name:'Student Welfare & Safeguarding',code:'SWS',mandate:'Support student access, attendance, wellbeing, retention, and safe learning.',keyDuties:'Student support; attendance follow-up; safeguarding referrals; family communication.'},
+{name:'Finance & Administration',code:'FIN',mandate:'Manage budgets, accounting, procurement, assets, facilities, and administrative services.',keyDuties:'Budgeting; payments; financial reports; procurement; asset register; facilities.'},
+{name:'Human Resources',code:'HR',mandate:'Recruit, onboard, develop, support, and evaluate personnel.',keyDuties:'Staffing; job descriptions; attendance; performance; training; personnel files.'},
+{name:'Information Technology',code:'IT',mandate:'Maintain reliable technology, systems, connectivity, devices, and data security.',keyDuties:'IT support; equipment; accounts; backups; access control; system maintenance.'},
+{name:'Partnerships & Employment',code:'PAR',mandate:'Build relationships with schools, employers, donors, customers, and training partners.',keyDuties:'Partnership agreements; internships; employer links; graduate opportunities.'},
+{name:'Monitoring, Evaluation & Learning',code:'MEL',mandate:'Measure performance, verify results, analyze evidence, and support organizational learning.',keyDuties:'KPIs; data quality; assessments; reports; feedback; improvement recommendations.'},
+{name:'Communications & Fundraising',code:'COM',mandate:'Communicate organizational impact and support resource mobilization.',keyDuties:'Communications; reports; visibility; donor communication; fundraising support.'}
+];
+const defaultGoals=[
+{name:'Improve quality of education',pillar:'Education quality',description:'Deliver structured, measurable, learner-centered education and improve teaching quality.',target:'Annual education plan delivered and learning outcomes improved',measure:'Assessment results, attendance, completion, and quality reviews',status:'Active',priority:'High'},
+{name:'Build practical digital skills',pillar:'Digital literacy & practical skills',description:'Develop practical capability in graphic design, editing, production, database development, and robotics.',target:'Students complete practical projects and demonstrate job-ready skills',measure:'Practical assessment pass rate and completed portfolios',status:'Active',priority:'High'},
+{name:'Integrate Islamic education and character',pillar:'Islamic education & character',description:'Provide Islamic teaching alongside academic and practical learning.',target:'Islamic learning and character activities integrated into the student program',measure:'Curriculum delivery and student development reviews',status:'Active',priority:'High'},
+{name:'Strengthen student welfare and access',pillar:'Student welfare & access',description:'Support vulnerable students to enroll, attend, remain in education, and complete learning.',target:'Improved enrollment, attendance, retention, and student support',measure:'Attendance, retention, and support case follow-up',status:'Active',priority:'High'},
+{name:'Connect skills to employment and income',pillar:'Employment & sustainability',description:'Connect training with practical projects, portfolios, internships, clients, and income opportunities.',target:'Graduates access paid projects, internships, or employment',measure:'Verified graduate outcomes within six months',status:'Active',priority:'High'},
+{name:'Build a clear and accountable organization',pillar:'Organizational excellence',description:'Establish clear departments, role ownership, simple systems, and performance reviews.',target:'Departments have approved mandates, role owners, and regular performance reviews',measure:'Department plans, assigned owners, and KPI review completion',status:'Active',priority:'High'}
+];
+function seed(){return {strategy:defaultGoals.map(x=>({id:uid(),...x})),departments:defaultDepartments.map(x=>({id:uid(),status:'Active',...x})),people:[],responsibilities:[],tasks:[],kpis:[],processes:[],meetings:[],raci:[],settings:{currency:'USD'}}}
+let db;
+try{db=JSON.parse(localStorage.getItem(KEY))||seed()}catch(e){db=seed()}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(db));return true}catch(e){alert('Could not save: browser storage is full. Export a backup and remove large evidence files.');return false}}
+let page='dashboard', editing=null, searchTerm='';
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const label=(type,id)=>{if(!id)return '—';let x=(db[type]||[]).find(a=>a.id===id);return x?(x.name||x.title||x.position||'Unnamed'):'—'};
+function count(type){return (db[type]||[]).length}
+function pct(x){return Math.max(0,Math.min(100,Number(x)||0))}
+function render(){document.querySelectorAll('#nav button[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));if(page==='dashboard')dashboard();else if(page==='tasks')tasksPage();else if(page==='taskreports')reportsPage();else if(page==='orgchart')orgchart();else if(page==='data')dataPage();else tablePage(page)}
+document.getElementById('nav').addEventListener('click',e=>{let b=e.target.closest('button[data-page]');if(!b)return;page=b.dataset.page;searchTerm='';render()});
+function head(title,desc,button){return `<div class="page-head"><div><h2>${title}</h2><p>${desc}</p></div>${button||''}</div>`}
+function dashboard(){
+let activeTasks=db.tasks.filter(x=>effStatus(x)!=='Completed');
+let overdue=activeTasks.filter(x=>effStatus(x)==='Overdue').length;
+let activeGoals=db.strategy.filter(x=>x.status==='Active').length;
+let activePeople=db.people.filter(x=>x.status==='Active').length;
+let html=head('Organization dashboard','A single view of strategic direction, organizational capacity, and execution.',`<button class="primary" onclick="openForm('tasks')">＋ Add task</button>`);
+html+=`<div class="stats">
+<div class="stat"><div class="label">Strategic goals</div><div class="value">${count('strategy')}</div><div class="hint">${activeGoals} active goals</div></div>
+<div class="stat"><div class="label">Departments</div><div class="value">${count('departments')}</div><div class="hint">Proposed structure; editable</div></div>
+<div class="stat"><div class="label">Active personnel</div><div class="value">${activePeople}</div><div class="hint">${count('people')} people registered</div></div>
+<div class="stat"><div class="label">Open tasks</div><div class="value">${activeTasks.length}</div><div class="hint">${overdue} overdue</div></div></div>`;
+html+=`<div class="grid2"><section class="panel"><h3>Strategic priorities</h3>${db.strategy.slice(0,7).map(g=>`<div style="margin:13px 0"><div style="display:flex;justify-content:space-between;gap:8px;font-size:12px"><b>${esc(g.name)}</b><span class="pill">${esc(g.status||'Draft')}</span></div><div class="small muted" style="margin-top:4px">${esc(g.pillar||'')}</div></div>`).join('')||'<div class="empty">No goals entered yet.</div>'}</section>
+<section class="panel"><h3>Task status (organization)</h3>${['Not Started','In Progress','Completed','Overdue'].map(k=>{let c=db.tasks.filter(t=>effStatus(t)===k).length;let total=Math.max(1,count('tasks'));return `<div class="bar-row"><span>${k}</span><div class="bar ${k==='Overdue'?'bad':k==='Completed'?'ok':''}"><i style="width:${c/total*100}%"></i></div><b>${c}</b></div>`}).join('')}<p class="small muted">Status is calculated automatically from progress and deadlines.</p></section></div>`;
+html+=deptProgressPanel();
+html+=`<section class="panel"><h3>Department readiness</h3><p class="small muted">Add personnel, then assign department heads and sub-heads in the Departments section.</p><div class="table-wrap"><table><thead><tr><th>Department</th><th>Head</th><th>Sub-head</th><th>Personnel</th><th>Status</th></tr></thead><tbody>${db.departments.map(d=>`<tr><td><b>${esc(d.name)}</b><br><span class="muted">${esc(d.code||'')}</span></td><td>${esc(label('people',d.head))}</td><td>${esc(label('people',d.subhead))}</td><td>${db.people.filter(p=>p.department===d.id).length}</td><td><span class="tag">${esc(d.status||'Active')}</span></td></tr>`).join('')}</tbody></table></div></section>`;
+html+=`<div class="notice"><b>Implementation note:</b> This prototype saves records in this browser on this device. Export a JSON backup regularly. It is not yet a multi-user, server-based database.</div>`;
+document.getElementById('main').innerHTML=html;
+}
+function tablePage(type){
+let s=schemas[type];if(!s)return;
+let rows=db[type]||[];
+let html=head(s.title,s.desc,`<button class="primary" onclick="openForm('${type}')">＋ Add ${s.singular}</button>`);
+html+=`<div class="toolbar"><input class="search" placeholder="Search ${s.title.toLowerCase()}..." value="${esc(searchTerm)}" oninput="searchTerm=this.value;tablePage('${type}')"><span class="small muted">${rows.length} record(s)</span></div>`;
+let cols=s.fields.slice(0,6);
+html+=`<div class="table-wrap"><table><thead><tr>${cols.map(f=>`<th>${esc(f[1])}</th>`).join('')}<th>Actions</th></tr></thead><tbody>`;
+let filtered=rows.filter(r=>JSON.stringify(r).toLowerCase().includes(searchTerm.toLowerCase()));
+if(!filtered.length)html+=`<tr><td colspan="${cols.length+1}" class="empty">No records found. Use “Add ${esc(s.singular)}” to create the first record.</td></tr>`;
+filtered.forEach(r=>{html+='<tr>'+cols.map(f=>`<td>${cellValue(type,r,f)}</td>`).join('')+`<td><div class="actions"><button class="light" onclick="openForm('${type}','${r.id}')">Edit</button><button class="danger" onclick="removeRecord('${type}','${r.id}')">Delete</button></div></td></tr>`});
+html+='</tbody></table></div>';
+html+=`<p class="footer-note">Records are connected through IDs. Use the edit action to update assignments and relationships.</p>`;
+document.getElementById('main').innerHTML=html;
+}
+function cellValue(type,r,f){let [key,name,kind]=f;let v=r[key];if(kind&&kind.startsWith('ref:'))return esc(label(kind.slice(4),v));if(key==='status'||key==='priority'){let cl=['Blocked','Off track','At risk','Critical'].includes(v)?'red':(['Completed','Active','On track','Achieved'].includes(v)?'':'orange');return `<span class="tag ${cl}">${esc(v||'—')}</span>`}if(key==='progress')return `${pct(v)}%`;return esc(v||'—')}
+function optionsFor(field,record){let kind=field[2];if(kind.startsWith('ref:')){let type=kind.slice(4);let opts=(db[type]||[]).map(x=>({value:x.id,label:x.name||x.title||x.position}));return `<option value="">— Not assigned —</option>`+opts.map(o=>`<option value="${o.value}" ${record&&record[field[0]]===o.value?'selected':''}>${esc(o.label)}</option>`).join('')}
+return `<option value="">Select...</option>`+(field[4]||[]).map(x=>`<option ${record&&record[field[0]]===x?'selected':''}>${esc(x)}</option>`).join('')}
+function openForm(type,id=null){
+if(type==='tasks')return openTaskForm(id);
+editing={type,id};let s=schemas[type],r=id?db[type].find(x=>x.id===id):{};
+document.getElementById('modalTitle').textContent=(id?'Edit ':'Add ')+s.singular;
+document.getElementById('formFields').innerHTML=s.fields.map(f=>{let [key,name,kind,required]=f;let val=r?.[key]??(key==='date'?today():key==='progress'?0:'');let full=kind==='textarea'?'full':'';
+let control=kind==='select'||kind.startsWith('ref:')?`<select name="${key}" ${required?'required':''}>${optionsFor(f,r)}</select>`:kind==='textarea'?`<textarea name="${key}" ${required?'required':''}>${esc(val)}</textarea>`:`<input name="${key}" type="${kind}" value="${esc(val)}" ${required?'required':''} ${kind==='number'?'min="0" max="100"':''}>`;
+return `<div class="field ${full}"><label>${esc(name)}${required?' *':''}</label>${control}</div>`}).join('');
+document.getElementById('modalBg').classList.add('show');
+}
+function closeModal(){document.getElementById('modalBg').classList.remove('show');editing=null}
+document.getElementById('recordForm').addEventListener('submit',e=>{e.preventDefault();if(!editing)return;let {type,id}=editing;if(type==='tasks'){saveTask(e.target);return}let s=schemas[type],data={};s.fields.forEach(f=>{let el=e.target.elements[f[0]];data[f[0]]=el?el.value:''});if(type==='tasks')data.progress=pct(data.progress);if(id){let i=db[type].findIndex(x=>x.id===id);db[type][i]={...db[type][i],...data}}else db[type].push({id:uid(),...data});save();closeModal();render()});
+function removeRecord(type,id){if(!confirm('Delete this record? Related records may still refer to it.'))return;db[type]=db[type].filter(x=>x.id!==id);save();render()}
+function orgchart(){
+let html=head('Organization chart','Proposed department hierarchy. Assign heads and sub-heads from the Departments form.',`<button class="primary" onclick="openForm('departments')">＋ Add department</button>`);
+let roots=db.departments.filter(d=>!d.parent);
+function branch(d){let kids=db.departments.filter(x=>x.parent===d.id);return `<div class="org-card"><strong>${esc(d.name)}</strong> <span class="pill">${esc(d.code||'')}</span><div class="small muted" style="margin-top:6px">Head: ${esc(label('people',d.head))} · Sub-head: ${esc(label('people',d.subhead))}</div><div class="small" style="margin-top:5px">${esc(d.mandate||'No mandate recorded')}</div><div class="actions" style="margin-top:8px"><button class="light" onclick="openForm('departments','${d.id}')">Edit</button></div></div>${kids.length?`<div class="org-children">${kids.map(branch).join('')}</div>`:''}`}
+html+=`<section class="panel"><h3>Executive level</h3>${roots.map(branch).join('')||'<div class="empty">No departments added.</div>'}</section>`;
+html+=`<div class="notice">This chart is a proposed starting structure, not a confirmed final organization chart. You can create parent-child reporting relationships by selecting a parent department.</div>`;
+document.getElementById('main').innerHTML=html;
+}
+function dataPage(){
+let html=head('Data & system instructions','Manage local data backups and understand how this prototype should be developed into a production database.');
+html+=`<div class="notice"><b>Important:</b> This is a standalone HTML prototype. Records are stored in this browser using local storage. Clearing browser data may remove records. It does not provide secure login, simultaneous multi-user access, server backups, or permission enforcement.</div>
+<div class="grid2"><section class="panel"><h3>Backup and portability</h3><p class="small muted">Export all records to a JSON file. Keep backups in a secure location. Import a previous JSON backup to restore data.</p><button class="primary" onclick="exportData()">Export complete database</button> <button class="light" onclick="document.getElementById('importFile').click()">Import JSON backup</button></section>
+<section class="panel"><h3>Current database counts</h3>${Object.keys(schemas).map(k=>`<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #eef1f4;font-size:12px"><span>${schemas[k].title}</span><b>${count(k)}</b></div>`).join('')}</section></div>
+<section class="panel"><h3>Task budget currency</h3><p class="small muted">Label shown next to budget amounts in Department Tasks and Task Reports (for example USD, EUR, AFN).</p><input class="search" value="${esc((db.settings||{}).currency||'')}" onchange="db.settings=db.settings||{};db.settings.currency=this.value.trim();save();"></section>
+<section class="panel"><h3>Recommended production architecture</h3>
+<p class="small">Ask your developer to build the production system with a server-side database (for example PostgreSQL), an API, secure authentication, role-based permissions, audit logs, and scheduled backups. The HTML file is a functional prototype and requirements reference—not a secure production database.</p>
+<ul class="small"><li>Organization and department hierarchy with head, sub-head, and staff assignments.</li><li>Personnel profiles, positions, supervisor relationships, and employment status.</li><li>Strategic goals connected to departments, responsibilities, KPIs, and tasks.</li><li>RACI assignments and decision authority.</li><li>Process/SOP version control and document attachments.</li><li>Meeting minutes, decisions, follow-up actions, and due dates.</li><li>Dashboards and exportable reports by organization, department, goal, and period.</li><li>Role permissions: administrator, executive, department head, staff, and read-only auditor.</li><li>Audit trail: who created, changed, approved, or deleted a record and when.</li><li>Daily automated backups, restore testing, and data export.</li></ul></section>
+<section class="panel"><h3>Suggested access rules</h3>
+<table><thead><tr><th>Role</th><th>Suggested access</th></tr></thead><tbody>
+<tr><td>System administrator</td><td>Manage users, permissions, settings, backups, and all records.</td></tr>
+<tr><td>Executive leadership</td><td>View organization-wide performance; approve strategic plans and designated decisions.</td></tr>
+<tr><td>Department head</td><td>Manage their department's people, responsibilities, tasks, processes, and KPIs.</td></tr>
+<tr><td>Sub-head</td><td>Manage delegated operational work and report to the department head.</td></tr>
+<tr><td>Personnel</td><td>View assigned responsibilities and update assigned tasks within permissions.</td></tr>
+<tr><td>Auditor / viewer</td><td>Read approved records and reports without editing.</td></tr></tbody></table></section>`;
+document.getElementById('main').innerHTML=html;
+}
+function exportData(){let blob=new Blob([JSON.stringify({app:'PROF.SCHOOL Operational Database',version:1,exportedAt:new Date().toISOString(),data:db},null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='prof-school-operational-database-backup.json';a.click();URL.revokeObjectURL(a.href)}
+function importData(e){let file=e.target.files[0];if(!file)return;let reader=new FileReader();reader.onload=()=>{try{let x=JSON.parse(reader.result);let incoming=x.data||x;if(!confirm('Replace the current local database with this backup?'))return;Object.keys(schemas).forEach(k=>db[k]=Array.isArray(incoming[k])?incoming[k]:[]);db.settings=incoming.settings||{currency:'USD'};normalizeTasks();save();render();alert('Backup imported successfully.')}catch(err){alert('Could not read this JSON backup.')}e.target.value=''};reader.readAsText(file)}
+function resetDemo(){if(!confirm('Reset all records and restore the proposed starting departments and strategic goals? This will erase local changes.'))return;db=seed();save();render()}
+/* ===================== DEPARTMENT TASK MANAGEMENT ===================== */
+const PRIORITIES=['Critical','High','Medium','Low'];
+const PRI_RANK={Critical:0,High:1,Medium:2,Low:3};
+let taskDept='all',taskPri='',taskStat='',repDept='all';
+const num=x=>{const n=parseFloat(x);return isNaN(n)?0:n};
+const fmt=n=>Number(n||0).toLocaleString('en-US',{maximumFractionDigits:2});
+const money=n=>fmt(n)+((db.settings&&db.settings.currency)?' '+db.settings.currency:'');
+const dayDiff=(a,b)=>Math.round((new Date(a)-new Date(b))/86400000);
+const byId=(type,id)=>(db[type]||[]).find(x=>x.id===id);
+const isHttp=s=>/^https?:\/\//i.test(String(s||'').trim());
+const statBox=(l,v,h)=>`<div class="stat"><div class="label">${l}</div><div class="value">${v}</div><div class="hint">${h||'&nbsp;'}</div></div>`;
+
+/* ---- migrate tasks saved by the earlier version of this file ---- */
+function normalizeTasks(){
+ const map={'Not started':'Not Started','In progress':'In Progress','Blocked':'In Progress','Under review':'In Progress','Completed':'Completed','Cancelled':'Not Started'};
+ db.tasks.forEach(t=>{
+  if(t.v===2)return;
+  const old=t.status;
+  t.status=map[old]||'Not Started';
+  if(['Cancelled','Blocked','Under review'].includes(old))t.description=((t.description||'')+' [Previous status: '+old+']').trim();
+  t.baseline=(t.baseline===undefined||t.baseline==='')?0:num(t.baseline);
+  t.target=(t.target===undefined||t.target==='')?100:num(t.target);
+  t.current=(t.current===undefined||t.current==='')?pct(t.progress):num(t.current);
+  t.unit=t.unit||'%';t.budget=num(t.budget);t.spent=num(t.spent);
+  t.updates=Array.isArray(t.updates)?t.updates:[];
+  t.priority=PRIORITIES.includes(t.priority)?t.priority:'Medium';
+  t.createdAt=t.createdAt||new Date().toISOString();
+  if(t.evidence){t.updates.push({id:uid(),at:t.createdAt,date:today(),by:t.owner||'',prevValue:t.baseline,value:t.current,pct:taskPct(t),note:'Migrated from the earlier task record.',evidence:t.evidence});delete t.evidence}
+  if(t.status==='Completed'&&!t.completedOn)t.completedOn=t.due||today();
+  t.v=2;
+ });
+}
+
+/* ---- calculations ---- */
+function taskPct(t){const b=num(t.baseline),g=num(t.target),c=num(t.current);if(g===b)return c>=g?100:0;return Math.max(0,Math.min(100,Math.round((c-b)/(g-b)*100)))}
+function effStatus(t){const p=taskPct(t);if(t.status==='Completed'||p>=100)return 'Completed';if(t.due&&t.due<today())return 'Overdue';if(t.status==='In Progress'||p>0)return 'In Progress';return 'Not Started'}
+const taskSort=(a,b)=>((PRI_RANK[a.priority]??9)-(PRI_RANK[b.priority]??9))||((effStatus(a)==='Completed')-(effStatus(b)==='Completed'))||String(a.due||'9999').localeCompare(String(b.due||'9999'));
+function summarize(list){
+ const r={n:list.length,done:0,over:0,prog:0,ns:0,crit:0,budget:0,spent:0,sum:0};
+ list.forEach(t=>{const s=effStatus(t);r.sum+=taskPct(t);r.budget+=num(t.budget);r.spent+=num(t.spent);
+  if(s==='Completed')r.done++;else{if(s==='Overdue')r.over++;if(s==='In Progress')r.prog++;if(s==='Not Started')r.ns++;if(t.priority==='Critical')r.crit++}});
+ r.avg=r.n?Math.round(r.sum/r.n):0;r.used=r.budget?Math.round(r.spent/r.budget*100):(r.spent?100:0);r.pending=r.prog+r.ns;return r}
+
+/* ---- small UI helpers ---- */
+const priTag=p=>`<span class="ptag pri-${esc(p)}">${esc(p)}</span>`;
+const stTag=s=>`<span class="tag st-${esc(String(s).replace(' ',''))}">${esc(s)}</span>`;
+function progCell(t){const p=taskPct(t),s=effStatus(t);const cls=s==='Completed'?'ok':s==='Overdue'?'bad':'';
+ return `<div class="pbar ${cls}"><i style="width:${p}%"></i></div><div><b>${p}%</b> · ${fmt(t.current)}${t.unit?' '+esc(t.unit):''}</div><div class="small muted">Baseline ${fmt(t.baseline)} → Target ${fmt(t.target)}</div>`}
+function budgetCell(t){const b=num(t.budget),s=num(t.spent),u=b>0?Math.round(s/b*100):(s>0?100:0),over=s>b;
+ return `<div class="small">Required: <b>${money(b)}</b></div><div class="small">Spent: <b class="${over?'neg':''}">${money(s)}</b></div><div class="pbar ${over?'bad':''}"><i style="width:${Math.min(100,u)}%"></i></div><div class="small muted">${b>0||s>0?u+'% used':'No budget set'}</div>`}
+function timeCell(t){const s=effStatus(t);let note='';
+ if(s==='Completed')note=t.completedOn?'Completed '+esc(t.completedOn):'Completed';
+ else if(t.due){const d=dayDiff(t.due,today());note=d<0?`<span class="neg">${-d} day(s) overdue</span>`:d===0?'Due today':`${d} day(s) left`}
+ return `<div class="small">${esc(t.start||'—')} → <b>${esc(t.due||'—')}</b></div><div class="small muted">${note}</div>`}
+function ownerOptions(dept,sel){
+ const ppl=db.people.filter(p=>p.status!=='Inactive'||p.id===sel);
+ const a=ppl.filter(p=>p.department===dept),b=ppl.filter(p=>p.department!==dept);
+ const o=p=>`<option value="${esc(p.id)}" ${p.id===sel?'selected':''}>${esc(p.name)}${p.position?' — '+esc(p.position):''}</option>`;
+ return `<option value="">— Select person —</option>`+(a.length?`<optgroup label="This department">${a.map(o).join('')}</optgroup>`:'')+(b.length?`<optgroup label="Other departments">${b.map(o).join('')}</optgroup>`:'')}
+function fillOwners(){const d=document.querySelector('#formFields [name=department]').value,o=document.querySelector('#formFields [name=owner]');o.innerHTML=ownerOptions(d,o.value)}
+function openPanel(title,html){document.getElementById('panelTitle').textContent=title;document.getElementById('panelBody').innerHTML=html;document.getElementById('panelBg').classList.add('show')}
+function closePanel(){document.getElementById('panelBg').classList.remove('show')}
+function goTasks(id){page='tasks';taskDept=id;searchTerm='';render()}
+
+/* ---- Step 1-3: department task lists ---- */
+function tasksPage(){
+ const tabs=[{id:'all',n:'All departments',l:db.tasks}].concat(db.departments.map(d=>({id:d.id,n:d.name,l:db.tasks.filter(t=>t.department===d.id)})));
+ if(!tabs.some(t=>t.id===taskDept))taskDept='all';
+ let html=head('Department Tasks','Every department has its own task list. Critical tasks always appear first, then High, Medium and Low.',`<button class="primary" onclick="openTaskForm()">＋ Add task</button>`);
+ if(!db.people.length)html+=`<div class="notice">No personnel are registered yet. Add people under <b>People & Positions</b> so a responsible person can be assigned to each task.</div>`;
+ html+=`<div class="dtabs">${tabs.map(t=>{const o=t.l.filter(x=>effStatus(x)==='Overdue').length;return `<button class="dtab ${taskDept===t.id?'active':''}" onclick="taskDept='${esc(t.id)}';tasksPage()">${esc(t.n)} <span class="pill">${t.l.length}</span>${o?`<span class="odot" title="${o} overdue">${o}</span>`:''}</button>`}).join('')}</div>`;
+ html+=`<div id="taskStats"></div>
+ <div class="toolbar"><input class="search" placeholder="Search tasks..." value="${esc(searchTerm)}" oninput="searchTerm=this.value;refreshTasks()">
+ <select class="search" style="min-width:150px" onchange="taskPri=this.value;refreshTasks()"><option value="">All priorities</option>${PRIORITIES.map(p=>`<option ${taskPri===p?'selected':''}>${p}</option>`).join('')}</select>
+ <select class="search" style="min-width:150px" onchange="taskStat=this.value;refreshTasks()"><option value="">All statuses</option>${['Not Started','In Progress','Completed','Overdue'].map(p=>`<option ${taskStat===p?'selected':''}>${p}</option>`).join('')}</select>
+ <span class="small muted" id="taskCount"></span></div>
+ <div class="legend">Priority colors: ${PRIORITIES.map(priTag).join(' ')}</div>
+ <div id="taskListBox"></div>`;
+ document.getElementById('main').innerHTML=html;refreshTasks();
+}
+function refreshTasks(){
+ const base=db.tasks.filter(t=>taskDept==='all'||t.department===taskDept),s=summarize(base);
+ const dn=taskDept==='all'?'All departments':label('departments',taskDept);
+ document.getElementById('taskStats').innerHTML=`<div class="stats s6">${statBox('Tasks',s.n,esc(dn))}${statBox('Completed',s.done,s.n?Math.round(s.done/s.n*100)+'% of tasks':'')}${statBox('Overdue',`<span class="${s.over?'neg':''}">${s.over}</span>`,s.pending+' pending')}${statBox('Critical (open)',`<span class="${s.crit?'neg':''}">${s.crit}</span>`,'')}${statBox('Avg. progress',s.avg+'%','')}${statBox('Budget used',s.used+'%',esc(money(s.spent))+' of '+esc(money(s.budget)))}</div>`;
+ const q=searchTerm.toLowerCase();
+ const rows=base.filter(t=>(!taskPri||t.priority===taskPri)&&(!taskStat||effStatus(t)===taskStat)&&(!q||[t.title,t.description,label('people',t.owner),label('strategy',t.goal),label('departments',t.department)].join(' ').toLowerCase().includes(q))).sort(taskSort);
+ document.getElementById('taskCount').textContent=rows.length+' task(s)';
+ let h=`<div class="table-wrap"><table style="min-width:1060px"><thead><tr><th>Priority</th><th>Task / strategic goal</th><th>Responsible</th><th>Start → Deadline</th><th>Progress (baseline → target)</th><th>Budget</th><th>Status</th><th>Actions</th></tr></thead><tbody>`;
+ if(!rows.length)h+=`<tr><td colspan="8" class="empty">${db.tasks.length?'No tasks match the current filters.':'No tasks yet. Use “Add task” to create the first task for '+esc(dn)+'.'}</td></tr>`;
+ rows.forEach(t=>{h+=`<tr class="prow p-${esc(t.priority)}"><td>${priTag(t.priority)}</td><td><b>${esc(t.title)}</b>${taskDept==='all'?`<div class="small muted">${esc(label('departments',t.department))}</div>`:''}<div class="small muted">Goal: ${esc(label('strategy',t.goal))}</div>${t.description?`<div class="small desc">${esc(t.description)}</div>`:''}</td><td>${esc(label('people',t.owner))}</td><td>${timeCell(t)}</td><td class="pcol">${progCell(t)}</td><td class="bcol">${budgetCell(t)}</td><td>${stTag(effStatus(t))}</td><td><div class="actions wrap"><button class="primary" onclick="openUpdate('${esc(t.id)}')">Update</button><button class="light" onclick="openHistory('${esc(t.id)}')">Details (${(t.updates||[]).length})</button><button class="light" onclick="openTaskForm('${esc(t.id)}')">Edit</button><button class="danger" onclick="removeRecord('tasks','${esc(t.id)}')">Delete</button></div></td></tr>`});
+ document.getElementById('taskListBox').innerHTML=h+'</tbody></table></div>';
+}
+
+/* ---- Step 2: add / edit task ---- */
+function openTaskForm(id){
+ const r=id?byId('tasks',id):{department:taskDept!=='all'?taskDept:'',priority:'Medium',status:'Not Started',start:today(),baseline:0,target:100,budget:0};
+ if(!r)return;
+ editing={type:'tasks',id:id||null};
+ document.getElementById('modalTitle').textContent=id?'Edit task':'Add department task';
+ const sel=(arr,v)=>arr.map(x=>`<option ${v===x?'selected':''}>${esc(x)}</option>`).join('');
+ const ref=(type,v)=>`<option value="">— Select —</option>`+db[type].map(x=>`<option value="${esc(x.id)}" ${v===x.id?'selected':''}>${esc(x.name||x.title)}</option>`).join('');
+ const F=(lab,ctl,full)=>`<div class="field ${full?'full':''}"><label>${lab}</label>${ctl}</div>`;
+ const v=k=>esc(r[k]??'');
+ document.getElementById('formFields').innerHTML=
+  (!db.people.length?`<div class="notice full">No personnel registered yet. Add people under <b>People & Positions</b> first so a responsible person can be assigned.</div>`:'')+
+  F('Task title *',`<input name="title" required value="${v('title')}">`,1)+
+  F('Description',`<textarea name="description">${v('description')}</textarea>`,1)+
+  F('Department *',`<select name="department" required onchange="fillOwners()">${ref('departments',r.department)}</select>`)+
+  F('Responsible person *',`<select name="owner" required>${ownerOptions(r.department,r.owner)}</select>`)+
+  F('Strategic goal *',`<select name="goal" required>${ref('strategy',r.goal)}</select>`,1)+
+  F('Priority *',`<select name="priority" required>${sel(PRIORITIES,r.priority)}</select>`)+
+  F('Status',`<select name="status">${sel(['Not Started','In Progress','Completed'],r.status)}</select>`)+
+  F('Start date',`<input type="date" name="start" value="${v('start')}">`)+
+  F('Deadline *',`<input type="date" name="due" required value="${v('due')}">`)+
+  F('Baseline (starting value) *',`<input type="number" step="any" name="baseline" required value="${v('baseline')}">`)+
+  F('Target (final value) *',`<input type="number" step="any" name="target" required value="${v('target')}">`)+
+  F('Unit of measure',`<input name="unit" placeholder="e.g. students, %, lessons" value="${v('unit')}">`)+
+  F('Required budget'+((db.settings&&db.settings.currency)?' ('+esc(db.settings.currency)+')':''),`<input type="number" step="any" min="0" name="budget" value="${v('budget')}">`)+
+  `<div class="notice full" style="margin:0">Current progress and actual spending are changed with <b>Update</b>, so every change is kept in the history. The status becomes <b>Overdue</b> automatically after the deadline passes.</div>`;
+ document.getElementById('modalBg').classList.add('show');
+}
+function saveTask(f){
+ const g=n=>(f.elements[n]?f.elements[n].value:'');
+ const data={title:g('title').trim(),description:g('description').trim(),department:g('department'),owner:g('owner'),goal:g('goal'),priority:g('priority'),start:g('start'),due:g('due'),status:g('status')||'Not Started',unit:g('unit').trim(),baseline:num(g('baseline')),target:num(g('target')),budget:Math.max(0,num(g('budget')))};
+ if(data.baseline===data.target){alert('The target must be different from the baseline.');return}
+ if(data.start&&data.due&&data.due<data.start){alert('The deadline cannot be before the start date.');return}
+ const backup=JSON.stringify(db.tasks);
+ let t;
+ if(editing.id){t=byId('tasks',editing.id);Object.assign(t,data)}
+ else{t={id:uid(),v:2,current:data.baseline,spent:0,updates:[],createdAt:new Date().toISOString(),...data};db.tasks.push(t)}
+ if(data.status==='Completed'){
+  if(taskPct(t)<100){t.updates.push({id:uid(),at:new Date().toISOString(),date:today(),by:t.owner,prevValue:t.current,value:t.target,pct:100,prevSpent:t.spent,spent:t.spent,note:'Marked as completed in the task form.'});t.current=t.target}
+  t.completedOn=t.completedOn||today();
+ }else if(taskPct(t)>=100){t.status='Completed';t.completedOn=t.completedOn||today()}
+ else t.completedOn='';
+ if(save()){closeModal();render()}else{db.tasks=JSON.parse(backup)}
+}
+
+/* ---- Step 5: progress updates with history ---- */
+function openUpdate(id){
+ const t=byId('tasks',id);if(!t)return;
+ const u=t.unit?' ('+esc(t.unit)+')':'';
+ openPanel('Update progress — '+t.title,`<div class="notice success">Baseline <b>${fmt(t.baseline)}</b> → Target <b>${fmt(t.target)}</b>${u} · Current <b>${fmt(t.current)}</b> (${taskPct(t)}%)</div>
+ <form onsubmit="submitUpdate(event,'${esc(t.id)}')"><div class="form-grid">
+ <div class="field"><label>Updated by *</label><select name="by" required>${ownerOptions(t.department,t.owner)}</select></div>
+ <div class="field"><label>Update date *</label><input type="date" name="date" value="${today()}" required></div>
+ <div class="field"><label>New current value${u} *</label><input type="number" step="any" name="value" value="${esc(t.current)}" required oninput="previewPct('${esc(t.id)}',this.value)"></div>
+ <div class="field"><label>Progress preview</label><div class="pvbox" id="pv"></div></div>
+ <div class="field"><label>Actual spending to date${(db.settings&&db.settings.currency)?' ('+esc(db.settings.currency)+')':''}</label><input type="number" step="any" min="0" name="spent" value="${esc(t.spent)}"></div>
+ <div class="field"><label>Evidence link or reference</label><input name="evidence" placeholder="https://… or document / report reference"></div>
+ <div class="field full"><label>Progress note *</label><textarea name="note" required placeholder="What was done? Any challenges or next steps?"></textarea></div>
+ <div class="field full"><label>Evidence file (optional, max 400 KB)</label><input type="file" name="file"></div>
+ </div><div class="form-actions"><button type="button" class="light" onclick="closePanel()">Cancel</button><button class="primary" type="submit">Save update</button></div></form>`);
+ previewPct(id,t.current);
+}
+function previewPct(id,v){const t=byId('tasks',id);if(!t)return;const p=taskPct({...t,current:num(v)});document.getElementById('pv').innerHTML=`<div class="pbar ${p>=100?'ok':''}"><i style="width:${p}%"></i></div><b>${p}%</b> <span class="small muted">of the way from baseline to target</span>`}
+async function submitUpdate(e,id){
+ e.preventDefault();const f=e.target,t=byId('tasks',id);if(!t)return;
+ let file=null;const fl=f.elements.file.files[0];
+ if(fl){
+  if(fl.size>400*1024){alert('The evidence file is larger than 400 KB. Please attach a smaller file or paste a link instead.');return}
+  file=await new Promise(res=>{const r=new FileReader();r.onload=()=>res({name:fl.name,type:fl.type,data:r.result});r.onerror=()=>res(null);r.readAsDataURL(fl)});
+  if(!file){alert('The evidence file could not be read.');return}
+ }
+ const idx=db.tasks.findIndex(x=>x.id===id),backup=JSON.parse(JSON.stringify(t));
+ const value=num(f.elements.value.value),spent=Math.max(0,num(f.elements.spent.value)),date=f.elements.date.value||today();
+ const entry={id:uid(),at:new Date().toISOString(),date,by:f.elements.by.value,prevValue:t.current,value,prevSpent:t.spent,spent,note:f.elements.note.value.trim(),evidence:f.elements.evidence.value.trim()};
+ if(file)entry.file=file;
+ t.current=value;t.spent=spent;
+ const p=taskPct(t);entry.pct=p;
+ if(p>=100){t.status='Completed';t.completedOn=date}
+ else{if(t.status==='Completed'){t.status='In Progress';t.completedOn=''}else if(t.status==='Not Started'&&value!==num(t.baseline))t.status='In Progress'}
+ t.updates=(t.updates||[]).concat(entry);
+ if(save()){closePanel();render();openHistory(id)}else db.tasks[idx]=backup;
+}
+function evidHtml(u){let h='';
+ if(u.evidence)h+=isHttp(u.evidence)?`<div class="small">Evidence: <a href="${esc(String(u.evidence).trim())}" target="_blank" rel="noopener noreferrer">${esc(u.evidence)}</a></div>`:`<div class="small">Evidence: ${esc(u.evidence)}</div>`;
+ if(u.file&&/^data:/i.test(u.file.data||''))h+=`<div class="small">Attached file: <a href="${esc(u.file.data)}" download="${esc(u.file.name)}">${esc(u.file.name)}</a></div>`;
+ return h}
+function openHistory(id){
+ const t=byId('tasks',id);if(!t)return;
+ const p=taskPct(t),s=effStatus(t),cls=s==='Completed'?'ok':s==='Overdue'?'bad':'';
+ const D=(k,v)=>`<div class="dg"><span>${k}</span><b>${v}</b></div>`;
+ const ups=(t.updates||[]).slice().sort((a,b)=>String(b.date).localeCompare(String(a.date))||String(b.at).localeCompare(String(a.at)));
+ const b=num(t.budget),sp=num(t.spent);
+ openPanel(t.title,`<div class="actions" style="margin-bottom:12px;align-items:center">${priTag(t.priority)} ${stTag(s)} <button class="primary" onclick="openUpdate('${esc(t.id)}')">＋ Add progress update</button> <button class="light" onclick="closePanel();openTaskForm('${esc(t.id)}')">Edit task</button></div>
+ ${t.description?`<p class="small">${esc(t.description)}</p>`:''}
+ <div class="pbar ${cls}" style="height:12px"><i style="width:${p}%"></i></div>
+ <div class="small"><b>${p}%</b> complete · current ${fmt(t.current)}${t.unit?' '+esc(t.unit):''} (baseline ${fmt(t.baseline)} → target ${fmt(t.target)})</div>
+ <div class="detail-grid">${D('Department',esc(label('departments',t.department)))}${D('Responsible',esc(label('people',t.owner)))}${D('Strategic goal',esc(label('strategy',t.goal)))}${D('Start date',esc(t.start||'—'))}${D('Deadline',esc(t.due||'—'))}${D('Completed on',esc(t.completedOn||'—'))}${D('Required budget',esc(money(b)))}${D('Actual spending',`<span class="${sp>b?'neg':''}">${esc(money(sp))}</span>`)}${D('Budget used',(b>0?Math.round(sp/b*100)+'%':'—'))}</div>
+ <h4 style="margin:16px 0 4px;color:var(--navy)">Update history (${ups.length})</h4>
+ ${ups.map(u=>`<div class="hitem"><div class="hhead"><b>${esc(u.date)}</b><span>by ${esc(label('people',u.by))}</span><span class="pill">${u.pct??''}%</span></div><div class="small">Value: ${fmt(u.prevValue)} → <b>${fmt(u.value)}</b>${(u.spent!==undefined&&u.prevSpent!==u.spent)?` · Spending: ${fmt(u.prevSpent)} → <b>${fmt(u.spent)}</b>`:''}</div>${u.note?`<div class="small hnote">${esc(u.note)}</div>`:''}${evidHtml(u)}</div>`).join('')||'<div class="empty">No progress updates recorded yet.</div>'}
+ <div class="hitem created"><div class="small">Task created ${esc((t.createdAt||'').slice(0,10))} · baseline ${fmt(t.baseline)}, target ${fmt(t.target)}</div></div>`);
+}
+
+/* ---- Step 6: dashboard panel ---- */
+function deptProgressPanel(){
+ const all=summarize(db.tasks);
+ const row=(name,s,click)=>`<tr class="${click?'clickrow':''}" ${click?`onclick="goTasks('${esc(click)}')"`:''}><td><b>${esc(name)}</b></td><td>${s.n}</td><td>${s.done}</td><td>${s.prog+s.ns}</td><td>${s.over?`<span class="neg">${s.over}</span>`:0}</td><td>${s.crit?`<span class="neg">${s.crit}</span>`:0}</td><td style="min-width:150px"><div class="pbar"><i style="width:${s.avg}%"></i></div><span class="small"><b>${s.avg}%</b></span></td><td>${s.used}%</td></tr>`;
+ const orphan=db.tasks.filter(t=>!db.departments.some(d=>d.id===t.department));
+ return `<section class="panel"><h3>Task progress — whole organization</h3>
+ <div class="orgprog"><div class="big">${all.avg}%</div><div style="flex:1"><div class="pbar" style="height:12px"><i style="width:${all.avg}%"></i></div><div class="small muted">${all.done} of ${all.n} tasks completed · ${all.over} overdue · ${all.crit} critical open · budget used ${all.used}% (${esc(money(all.spent))} of ${esc(money(all.budget))})</div></div></div>
+ <h3 style="margin-top:20px">Task progress by department</h3><div class="table-wrap"><table><thead><tr><th>Department</th><th>Tasks</th><th>Completed</th><th>Pending</th><th>Overdue</th><th>Critical open</th><th>Average progress</th><th>Budget used</th></tr></thead><tbody>
+ ${db.departments.map(d=>row(d.name,summarize(db.tasks.filter(t=>t.department===d.id)),d.id)).join('')}${orphan.length?row('Unassigned / removed department',summarize(orphan)):''}
+ <tr class="total"><td>Whole organization</td><td>${all.n}</td><td>${all.done}</td><td>${all.pending}</td><td>${all.over}</td><td>${all.crit}</td><td><b>${all.avg}%</b></td><td>${all.used}%</td></tr></tbody></table></div><p class="small muted">Click a department to open its task list.</p></section>`;
+}
+
+/* ---- Step 7: reports ---- */
+function reportsPage(){
+ if(repDept!=='all'&&!byId('departments',repDept))repDept='all';
+ const list=db.tasks.filter(t=>repDept==='all'||t.department===repDept),s=summarize(list);
+ const by=st=>list.filter(t=>effStatus(t)===st).sort(taskSort);
+ const scope=repDept==='all'?'Whole organization':label('departments',repDept);
+ const cPri=['Priority',t=>priTag(t.priority)],cTask=['Task',t=>`<b>${esc(t.title)}</b><div class="small muted">${esc(label('strategy',t.goal))}</div>`],cDept=['Department',t=>esc(label('departments',t.department))],cOwn=['Responsible',t=>esc(label('people',t.owner))],cDue=['Deadline',t=>esc(t.due||'—')],cProg=['Progress',t=>`<div class="pbar"><i style="width:${taskPct(t)}%"></i></div><b>${taskPct(t)}%</b>`],cStat=['Status',t=>stTag(effStatus(t))];
+ const completed=by('Completed'),pending=list.filter(t=>['Not Started','In Progress'].includes(effStatus(t))).sort(taskSort),overdue=by('Overdue'),critical=list.filter(t=>t.priority==='Critical'&&effStatus(t)!=='Completed').sort(taskSort);
+ let html=head('Task Reports','Completed, pending, overdue and critical tasks, plus budget usage — for one department or the whole organization.',`<button class="light" onclick="window.print()">🖨 Print</button> <button class="primary" onclick="exportTasksCsv()">⬇ Export CSV</button>`);
+ html+=`<div class="toolbar"><span class="small muted">Report scope:</span><select class="search" style="min-width:260px" onchange="repDept=this.value;reportsPage()"><option value="all">Whole organization</option>${db.departments.map(d=>`<option value="${esc(d.id)}" ${repDept===d.id?'selected':''}>${esc(d.name)}</option>`).join('')}</select><span class="small muted">Report date: ${today()} · Scope: ${esc(scope)}</span></div>`;
+ html+=`<div class="stats s6">${statBox('Total tasks',s.n,'')}${statBox('Completed',s.done,s.n?Math.round(s.done/s.n*100)+'% of tasks':'')}${statBox('Pending',s.pending,'Not started or in progress')}${statBox('Overdue',`<span class="${s.over?'neg':''}">${s.over}</span>`,'Deadline passed')}${statBox('Critical (open)',`<span class="${s.crit?'neg':''}">${s.crit}</span>`,'')}${statBox('Budget used',s.used+'%',esc(money(s.spent))+' of '+esc(money(s.budget)))}</div>`;
+ html+=budgetPanel(list);
+ html+=repTable('Completed tasks',completed,[cPri,cTask,cDept,cOwn,cDue,['Completed on',t=>esc(t.completedOn||'—')],['Timing',t=>t.completedOn&&t.due?(t.completedOn<=t.due?'<span style="color:var(--green);font-weight:700">On time</span>':`<span class="neg">${dayDiff(t.completedOn,t.due)} day(s) late</span>`):'—'],['Budget / spent',t=>`${esc(money(t.budget))} / <span class="${num(t.spent)>num(t.budget)?'neg':''}">${esc(money(t.spent))}</span>`]],'No completed tasks yet.');
+ html+=repTable('Pending tasks (not started or in progress)',pending,[cPri,cTask,cDept,cOwn,['Deadline',t=>{const d=dayDiff(t.due,today());return esc(t.due||'—')+(t.due?`<div class="small muted">${d===0?'Due today':d+' day(s) left'}</div>`:'')}],cProg,cStat],'No pending tasks.');
+ html+=repTable('Overdue tasks',overdue,[cPri,cTask,cDept,cOwn,cDue,['Days overdue',t=>`<span class="neg">${dayDiff(today(),t.due)}</span>`],cProg],'No overdue tasks. 🎉');
+ html+=repTable('Critical tasks (open)',critical,[cPri,cTask,cDept,cOwn,cDue,cProg,cStat],'No open critical tasks.');
+ document.getElementById('main').innerHTML=html;
+}
+function repTable(title,list,cols,emptyMsg){
+ return `<section class="panel"><h3>${title} <span class="pill">${list.length}</span></h3>${list.length?`<div class="table-wrap"><table style="min-width:900px"><thead><tr>${cols.map(c=>`<th>${c[0]}</th>`).join('')}</tr></thead><tbody>${list.map(t=>`<tr class="prow p-${esc(t.priority)}">${cols.map(c=>`<td>${c[1](t)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`:`<div class="empty">${emptyMsg}</div>`}</section>`}
+function budgetPanel(list){
+ const mk=(name,l)=>({name,n:l.length,b:l.reduce((a,t)=>a+num(t.budget),0),s:l.reduce((a,t)=>a+num(t.spent),0),over:l.filter(t=>num(t.spent)>num(t.budget)).length});
+ const rows=repDept==='all'?db.departments.map(d=>mk(d.name,list.filter(t=>t.department===d.id))).filter(r=>r.n):list.slice().sort(taskSort).map(t=>mk(t.title,[t]));
+ const tot=mk('Total',list);
+ const tr=(r,cls)=>{const u=r.b?Math.round(r.s/r.b*100):(r.s?100:0),rem=r.b-r.s;return `<tr class="${cls||''}"><td><b>${esc(r.name)}</b></td><td>${esc(money(r.b))}</td><td>${esc(money(r.s))}</td><td class="${rem<0?'neg':''}">${esc(money(rem))}</td><td style="min-width:150px"><div class="pbar ${r.s>r.b?'bad':''}"><i style="width:${Math.min(100,u)}%"></i></div><span class="small">${u}% used</span></td><td>${r.over?`<span class="neg">${r.over}</span>`:'0'}</td></tr>`};
+ return `<section class="panel"><h3>Budget usage</h3>${list.length?`<div class="table-wrap"><table style="min-width:760px"><thead><tr><th>${repDept==='all'?'Department':'Task'}</th><th>Required budget</th><th>Actual spending</th><th>Remaining</th><th>Usage</th><th>Over budget</th></tr></thead><tbody>${rows.map(r=>tr(r)).join('')}${tr(tot,'total')}</tbody></table></div>`:'<div class="empty">No tasks yet.</div>'}</section>`}
+function exportTasksCsv(){
+ const list=db.tasks.filter(t=>repDept==='all'||t.department===repDept).sort(taskSort);
+ const head=['Department','Task','Description','Strategic goal','Responsible','Priority','Start date','Deadline','Baseline','Target','Unit','Current value','Progress %','Required budget','Actual spending','Status','Completed on','Updates'];
+ const q=v=>{if(typeof v==='number')return String(v);let s=String(v??'');if(/^[=+\-@\t\r]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"'};
+ const rows=list.map(t=>[label('departments',t.department),t.title,t.description,label('strategy',t.goal),label('people',t.owner),t.priority,t.start,t.due,num(t.baseline),num(t.target),t.unit,num(t.current),taskPct(t),num(t.budget),num(t.spent),effStatus(t),t.completedOn,(t.updates||[]).length]);
+ const csv='\ufeff'+[head].concat(rows).map(r=>r.map(q).join(',')).join('\r\n');
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='department-tasks-report-'+today()+'.csv';a.click();URL.revokeObjectURL(a.href);
+}
+
+/* ---- start-up ---- */
+db.settings=db.settings||{currency:'USD'};
+normalizeTasks();
+
+render();
+</script>
+</body>
+</html>
